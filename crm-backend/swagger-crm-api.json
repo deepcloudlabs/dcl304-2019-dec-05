@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CRM API",
+    "description": "CRM Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:4001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Customers",
+      "description": "API for crm"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/customers": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "description": "Create new customer in system",
+        "parameters": [
+          {
+            "name": "customer",
+            "in": "body",
+            "description": "Customer that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New customer is created",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Get all customers in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Customers"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update customer",
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "customer",
+            "in": "body",
+            "description": "Customer that we want to update",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer is updated",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      }
+    },
+    "/customers/{identity}": {
+      "parameters": [
+        {
+          "name": "identity",
+          "in": "path",
+          "required": true,
+          "description": "Identity No of customer that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Get customer with given Identity No",
+        "responses": {
+          "200": {
+            "description": "Customer is found",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete customer with given Identity No",
+        "tags": [
+          "Customers"
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer is deleted",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Customer": {
+      "required": [
+        "_id",
+        "identityNo",
+        "fullname"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "identityNo": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "fullname": {
+          "type": "string"
+        }
+      }
+    },
+    "Employees": {
+      "type": "array",
+      "$ref": "#/definitions/Customer"
+    }
+  }
+}
