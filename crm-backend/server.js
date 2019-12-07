@@ -34,13 +34,13 @@ const customerSchema = new mongoose.Schema({
     "fullname": {
         type: String,
         required: true,
-        minLength: 5
+        minlength: 5
     },
     "identityNo": {
         type: String,
         required: true,
-        minLength: 11,
-        maxLength: 11
+        minlength: 11,
+        maxlength: 11
     }
 });
 const Customer = mongoose.model('customers', customerSchema);
@@ -52,7 +52,7 @@ app.post("/customers", (req, res) => {
         if (err)
             res.status(404).send({"status": err})
         else
-            res.status(200).send({"status": "OK"})
+            res.status(200).send({"status": "OK", data: newcust})
     })
 });
 app.get("/customers/:identity", (req, res) => {
